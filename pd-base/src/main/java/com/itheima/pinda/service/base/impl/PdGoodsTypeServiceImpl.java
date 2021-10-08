@@ -1,5 +1,7 @@
 package com.itheima.pinda.service.base.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.pinda.common.CustomIdGenerator;
 import com.itheima.pinda.entity.base.PdGoodsType;
@@ -7,6 +9,8 @@ import com.itheima.pinda.mapper.base.PdGoodsTypeMapper;
 import com.itheima.pinda.service.base.IPdGoodsTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PdGoodsTypeServiceImpl extends ServiceImpl<PdGoodsTypeMapper, PdGoodsType> implements IPdGoodsTypeService {
@@ -24,5 +28,32 @@ public class PdGoodsTypeServiceImpl extends ServiceImpl<PdGoodsTypeMapper, PdGoo
         baseMapper.insert(pdGoodsType);
         System.out.println("git");
         return pdGoodsType;
+    }
+
+    /**
+     * 查询所有货物类型
+     *
+     * @return
+     */
+    @Override
+    public List<PdGoodsType> findAll() {
+        QueryWrapper<PdGoodsType> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status",1);
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    /**
+     * 获取分页货物类型数据
+     *
+     * @param page          页码
+     * @param pageSize      页尺寸
+     * @param name
+     * @param truckTypeId
+     * @param truckTypeName
+     * @return 分页货物数据
+     */
+    @Override
+    public IPage<PdGoodsType> findByPage(Integer page, Integer pageSize, String name, String truckTypeId, String truckTypeName) {
+        return null;
     }
 }

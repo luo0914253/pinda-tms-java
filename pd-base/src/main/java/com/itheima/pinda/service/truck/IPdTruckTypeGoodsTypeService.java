@@ -14,4 +14,12 @@ public interface IPdTruckTypeGoodsTypeService extends IService<PdTruckTypeGoodsT
      * @param truckTypeGoodsTypeList 车辆类型与货物类型信息
      */
     void batchSave(List<PdTruckTypeGoodsType> truckTypeGoodsTypeList);
+    /**
+     * 获取车辆类型与货物类型关联
+     *
+     * @param truckTypeId 车辆类型id
+     * @param goodsTypeId 货物类型id
+     * @return 车辆类型与货物类型关联
+     */
+    List<PdTruckTypeGoodsType> findAll(String truckTypeId, String goodsTypeId);
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-aggregation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-dispatch" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-druid" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-netty" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-oms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-aggregation-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-aggregation-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-base-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-base-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-oms-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-oms-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-user-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-user-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-work-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-work-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-web/pd-web-courier" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-web/pd-web-customer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-web/pd-web-driver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-web/pd-web-manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-work" charset="UTF-8" />
+  </component>
+</project>

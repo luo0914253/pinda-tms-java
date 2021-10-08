@@ -1,18 +1,18 @@
 package com.itheima.pinda.controller.base;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.itheima.pinda.DTO.base.GoodsTypeDto;
+import com.itheima.pinda.common.utils.PageResponse;
 import com.itheima.pinda.entity.base.PdGoodsType;
 import com.itheima.pinda.entity.base.PdTruckTypeGoodsType;
 import com.itheima.pinda.service.base.IPdGoodsTypeService;
 import com.itheima.pinda.service.truck.IPdTruckTypeGoodsTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,19 +31,19 @@ public class GoodsTypeController {
     /**
      * 添加货物类型
      *
-     * @param dto 货物类型信息
+     * @param goodsTypeDto 货物类型信息
      * @return 货物类型信息
      */
     @PostMapping("")
     @ApiOperation(value = "添加货物类型")
-    public GoodsTypeDto saveGoodsType(@RequestBody GoodsTypeDto dto) {
+    public GoodsTypeDto saveGoodsType(@RequestBody GoodsTypeDto goodsTypeDto) {
         PdGoodsType pdGoodsType = new PdGoodsType();
-        BeanUtils.copyProperties(dto,pdGoodsType);
+        BeanUtils.copyProperties(goodsTypeDto,pdGoodsType);
 //      保存货物类型信息到货物类型表
         pdGoodsType = pdGoodsTypeService.saveGoodsType(pdGoodsType);
         String goodsTypeId = pdGoodsType.getId();
 //      保存货物类型和车辆类型关联信息到关联表
-        List<String> truckTypeIds = dto.getTruckTypeIds();
+        List<String> truckTypeIds = goodsTypeDto.getTruckTypeIds();
         if (truckTypeIds != null && truckTypeIds.size() >0){
             List<PdTruckTypeGoodsType> list = truckTypeIds.stream().map(truckTypeId -> {
                 PdTruckTypeGoodsType pdTruckTypeGoodsType = new PdTruckTypeGoodsType();
@@ -53,7 +53,81 @@ public class GoodsTypeController {
             }).collect(Collectors.toList());
             pdTruckTypeGoodsTypeService.batchSave(list);
         }
-        BeanUtils.copyProperties(pdGoodsType,dto);
-        return dto;
+        BeanUtils.copyProperties(pdGoodsType,goodsTypeDto);
+        return goodsTypeDto;
+    }
+    /**
+     * 根据id查询货物类型
+     *
+     * @param id 货物类型id
+     * @return 货物类型信息
+     */
+    @GetMapping("/{id}")
+    public GoodsTypeDto fineById(@PathVariable(name = "id") String id) {
+        PdGoodsType pdGoodsType = pdGoodsTypeService.getById(id);
+        GoodsTypeDto goodsTypeDto = new GoodsTypeDto();
+        BeanUtils.copyProperties(pdGoodsType,goodsTypeDto);
+        List<PdTruckTypeGoodsType> pdTruckTypeGoodsTypeList = pdTruckTypeGoodsTypeService.findAll(null, id);
+        if (pdTruckTypeGoodsTypeList != null && pdTruckTypeGoodsTypeList.size() > 0){
+            List<String> truckTypeId = pdTruckTypeGoodsTypeList.stream().map(pdTruckTypeGoodsType ->
+                pdTruckTypeGoodsType.getTruckTypeId()
+            ).collect(Collectors.toList());
+            goodsTypeDto.setTruckTypeIds(truckTypeId);
+        }
+        return goodsTypeDto;
+    }
+    /**
+     * 查询所有货物类型
+     * @return
+     */
+    @GetMapping("/all")
+    @ApiOperation(value = "查询所有货物类型")
+    public List<GoodsTypeDto> findAll() {
+        List<PdGoodsType> goodsTypes = pdGoodsTypeService.findAll();
+        if (CollectionUtils.isNotEmpty(goodsTypes)){
+            List<GoodsTypeDto> goodsTypeDtos = goodsTypes.stream().map(goodsType -> {
+                GoodsTypeDto goodsTypeDto = new GoodsTypeDto();
+                BeanUtils.copyProperties(goodsType, goodsTypeDto);
+                return goodsTypeDto;
+            }).collect(Collectors.toList());
+            return goodsTypeDtos;
+        }
+        return null;
+    }
+    /**
+     * 获取分页货物类型数据
+     *
+     * @param page          页码
+     * @param pageSize      页尺寸
+     * @param name          货物类型名称
+     * @param truckTypeId   车辆类型Id
+     * @param truckTypeName 车辆类型名称
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation(value = "获取分页货物类型数据")
+    public PageResponse<GoodsTypeDto> findByPage(
+            @RequestParam(name = "page") Integer page,
+            @RequestParam(name = "pageSize") Integer pageSize,
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "truckTypeId", required = false) String truckTypeId,
+            @RequestParam(name = "truckTypeName", required = false) String truckTypeName){
+        IPage<PdGoodsType> goodsTypePage = pdGoodsTypeService.findByPage(page, pageSize, name, truckTypeId, truckTypeName);
+        List<PdGoodsType> goodsTypePageRecords = goodsTypePage.getRecords();
+        if (CollectionUtils.isNotEmpty(goodsTypePageRecords)){
+            List<GoodsTypeDto> goodsTypeDtoList = goodsTypePageRecords.stream().map(goodsType -> {
+//              获取车辆类型与货物类型关联
+                List<PdTruckTypeGoodsType> truckTypeGoodsTypes = pdTruckTypeGoodsTypeService.findAll(null, goodsType.getId());
+                List<String> truckTypeIds = truckTypeGoodsTypes.stream().map(pdTruckTypeGoodsType ->
+                        pdTruckTypeGoodsType.getTruckTypeId()).collect(Collectors.toList());
+                GoodsTypeDto goodsTypeDto = new GoodsTypeDto();
+                BeanUtils.copyProperties(goodsType, goodsTypeDto);
+                goodsTypeDto.setTruckTypeIds(truckTypeIds);
+                return goodsTypeDto;
+            }).collect(Collectors.toList());
+            return PageResponse.<GoodsTypeDto>builder().items(goodsTypeDtoList).counts(goodsTypePage.getTotal())
+                    .page(page).pagesize(pageSize).build();
+        }
+        return null;
     }
 }
