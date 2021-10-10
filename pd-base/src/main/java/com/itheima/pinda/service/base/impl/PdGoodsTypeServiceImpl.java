@@ -1,7 +1,10 @@
 package com.itheima.pinda.service.base.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.pinda.common.CustomIdGenerator;
 import com.itheima.pinda.entity.base.PdGoodsType;
@@ -54,6 +57,17 @@ public class PdGoodsTypeServiceImpl extends ServiceImpl<PdGoodsTypeMapper, PdGoo
      */
     @Override
     public IPage<PdGoodsType> findByPage(Integer page, Integer pageSize, String name, String truckTypeId, String truckTypeName) {
-        return null;
+        Page<PdGoodsType> ipage = new Page<>(page,pageSize);
+        ipage.addOrder(OrderItem.asc("id"));
+        ipage.setRecords(baseMapper.findByPage(ipage,name,truckTypeId,truckTypeName));
+        return ipage;
+    }
+    @Override
+    public List<PdGoodsType> findAll(List<String> ids) {
+        LambdaQueryWrapper<PdGoodsType> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        if (ids != null && ids.size() > 0) {
+            lambdaQueryWrapper.in(PdGoodsType::getId, ids);
+        }
+        return baseMapper.selectList(lambdaQueryWrapper);
     }
 }

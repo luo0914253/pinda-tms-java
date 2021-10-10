@@ -130,4 +130,26 @@ public class GoodsTypeController {
         }
         return null;
     }
+    /**
+     * 获取货物类型列表
+     *
+     * @return 货物类型列表
+     */
+    @GetMapping("")
+    @ApiOperation(value = "获取货物类型列表")
+    public List<GoodsTypeDto> findAll(@RequestParam(name = "ids", required = false) List<String> ids) {
+        List<PdGoodsType> pdGoodsTypeList = pdGoodsTypeService.findAll(ids);
+        if (CollectionUtils.isNotEmpty(pdGoodsTypeList)){
+            List<GoodsTypeDto> goodsTypeDtos = pdGoodsTypeList.stream().map(pdGoodsType -> {
+                List<PdTruckTypeGoodsType> pdTruckTypeGoodsTypeList = pdTruckTypeGoodsTypeService.findAll(null, pdGoodsType.getId());
+                List<String> truckTypeIds = pdTruckTypeGoodsTypeList.stream().map(pdTruckTypeGoodsType ->pdTruckTypeGoodsType.getTruckTypeId()).collect(Collectors.toList());
+                GoodsTypeDto dto = new GoodsTypeDto();
+                BeanUtils.copyProperties(pdGoodsType, dto);
+                dto.setTruckTypeIds(truckTypeIds);
+                return dto;
+            }).collect(Collectors.toList());
+            return goodsTypeDtos;
+        }
+        return null;
+    }
 }

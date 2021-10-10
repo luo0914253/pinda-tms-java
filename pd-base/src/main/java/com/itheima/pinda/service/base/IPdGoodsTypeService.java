@@ -31,4 +31,11 @@ public interface IPdGoodsTypeService extends IService<PdGoodsType> {
      * @return 分页货物数据
      */
     IPage<PdGoodsType> findByPage(Integer page, Integer pageSize, String name, String truckTypeId, String truckTypeName);
+
+    /**
+     * 获取货物类型列表
+     * @param ids 货物类型id
+     * @return 货物类型列表
+     */
+    List<PdGoodsType> findAll(List<String> ids);
 }
