@@ -1,0 +1,13 @@
+com\itheima\pinda\service\truck\IPdTruckTypeGoodsTypeService.class
+com\itheima\pinda\mapper\base\PdGoodsTypeMapper.class
+com\itheima\pinda\common\CustomIdGenerator.class
+com\itheima\pinda\mapper\truck\PdTruckTypeGoodsTypeMapper.class
+com\itheima\pinda\config\MybatisPlusConfig.class
+com\itheima\pinda\controller\base\GoodsTypeController.class
+com\itheima\pinda\service\base\impl\PdGoodsTypeServiceImpl.class
+com\itheima\pinda\BaseApplication.class
+com\itheima\pinda\config\SwaggerConfig.class
+com\itheima\pinda\service\truck\impl\PdTruckTypeGoodsTypeServiceImpl.class
+com\itheima\pinda\service\base\IPdGoodsTypeService.class
+com\itheima\pinda\entity\base\PdTruckTypeGoodsType.class
+com\itheima\pinda\entity\base\PdGoodsType.class
