@@ -21,6 +21,9 @@
     <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-work-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pd-service-api/pd-service-work-domain" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pd-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-user/src/main/java/com/itheima/pinda/config/SwaggerConfig.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-user/src/main/java/com/itheima/pinda/controller/AddressBookController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pd-user/src/main/java/com/itheima/pinda/controller/MemberController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pd-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pd-web/pd-web-courier" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pd-web/pd-web-customer" charset="UTF-8" />

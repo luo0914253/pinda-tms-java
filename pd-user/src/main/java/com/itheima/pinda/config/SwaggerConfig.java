@@ -37,7 +37,6 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .version("1.0")
                 .build();
     }
-
     /**
      * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
      *
@@ -51,7 +50,5 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         // 解决swagger的js文件无法访问
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-
     }
-
 }

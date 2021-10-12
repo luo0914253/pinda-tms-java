@@ -19,7 +19,8 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("pd_address_book")
-public class AddressBook implements Serializable{
+public class AddressBook implements Serializable {
+
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
     /**
@@ -66,9 +67,6 @@ public class AddressBook implements Serializable{
      * 创建时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(
-            pattern = "yyyy-MM-dd HH:mm:ss"
-    )
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
-
 }

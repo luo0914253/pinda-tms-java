@@ -2,7 +2,9 @@ package com.itheima.pinda.controller.base;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.itheima.pinda.DTO.base.GoodsTypeDto;
+import com.itheima.pinda.common.utils.Constant;
 import com.itheima.pinda.common.utils.PageResponse;
+import com.itheima.pinda.common.utils.Result;
 import com.itheima.pinda.entity.base.PdGoodsType;
 import com.itheima.pinda.entity.base.PdTruckTypeGoodsType;
 import com.itheima.pinda.service.base.IPdGoodsTypeService;
@@ -151,5 +153,49 @@ public class GoodsTypeController {
             return goodsTypeDtos;
         }
         return null;
+    }
+    /**
+     * 更新货物类型信息
+     *
+     * @param dto 货物类型信息
+     * @return 货物类型信息
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "更新货物类型信息")
+    public GoodsTypeDto update(@PathVariable(name = "id") String id, @RequestBody GoodsTypeDto dto) {
+        PdGoodsType pdGoodsType = new PdGoodsType();
+        BeanUtils.copyProperties(dto,pdGoodsType);
+        pdGoodsType.setId(id);
+//      更新货物类型
+        pdGoodsTypeService.updateById(pdGoodsType);
+//      更新关联信息
+        List<String> truckTypeIds = dto.getTruckTypeIds();
+        if (CollectionUtils.isNotEmpty(truckTypeIds)){
+//          清理原有关联信息
+            pdTruckTypeGoodsTypeService.delete(null,id);
+//          重新建立关联关系
+            List<PdTruckTypeGoodsType> pdTruckTypeGoodsTypes = truckTypeIds.stream().map(truckTypeId -> {
+                PdTruckTypeGoodsType pdTruckTypeGoodsType = new PdTruckTypeGoodsType();
+                pdTruckTypeGoodsType.setTruckTypeId(truckTypeId);
+                pdTruckTypeGoodsType.setGoodsTypeId(id);
+                return pdTruckTypeGoodsType;
+            }).collect(Collectors.toList());
+            pdTruckTypeGoodsTypeService.batchSave(pdTruckTypeGoodsTypes);
+        }
+        return dto;
+    }
+    /**
+     * 删除货物类型
+     * @param id 货物类型id
+     * @return 返回信息
+     */
+    @PutMapping("/{id}/disable")
+    @ApiOperation(value = "删除货物类型")
+    public Result disable(@PathVariable(name = "id") String id) {
+        PdGoodsType pdGoodsType = new PdGoodsType();
+        pdGoodsType.setId(id);
+        pdGoodsType.setStatus(Constant.DATA_DISABLE_STATUS);
+        pdGoodsTypeService.updateById(pdGoodsType);
+        return Result.ok();
     }
 }

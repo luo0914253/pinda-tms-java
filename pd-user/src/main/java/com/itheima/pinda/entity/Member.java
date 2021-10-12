@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
  * 用户
  */
@@ -16,8 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("pd_member")
-public class Member implements Serializable{
-
+public class Member {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
     /**
@@ -36,5 +33,4 @@ public class Member implements Serializable{
      * 手机号
      */
     private String phone;
-
 }

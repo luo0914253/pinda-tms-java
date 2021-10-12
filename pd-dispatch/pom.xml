@@ -55,31 +55,31 @@
             <artifactId>pd-auth-api</artifactId>
             <version>${pd-auth-api.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.itheima</groupId>-->
-            <!--<artifactId>pd-common</artifactId>-->
-            <!--<version>${pd-common.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.itheima</groupId>-->
-            <!--<artifactId>pd-service-base-api</artifactId>-->
-            <!--<version>${pd-service-base-api.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.itheima</groupId>-->
-            <!--<artifactId>pd-service-work-api</artifactId>-->
-            <!--<version>${pd-service-work-api.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.itheima</groupId>-->
-            <!--<artifactId>pd-service-oms-api</artifactId>-->
-            <!--<version>${pd-service-oms-api.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.itheima</groupId>-->
-            <!--<artifactId>pd-service-user-api</artifactId>-->
-            <!--<version>${pd-service-user-api.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>pd-common</artifactId>
+            <version>${pd-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>pd-service-base-api</artifactId>
+            <version>${pd-service-base-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>pd-service-work-api</artifactId>
+            <version>${pd-service-work-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>pd-service-oms-api</artifactId>
+            <version>${pd-service-oms-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itheima</groupId>
+            <artifactId>pd-service-user-api</artifactId>
+            <version>${pd-service-user-api.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
